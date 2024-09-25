@@ -17,3 +17,15 @@ C:\Users\Powel\source\repos\Tagsformatter\Tagsformatter\bin\Debug\Tagsformatter.
 C:\Users\Powel\source\repos\Tagsformatter\Tagsformatter\bin\Debug\Tagsformatter.application
 C:\Users\Powel\source\repos\Tagsformatter\Tagsformatter\obj\Debug\Tagsformatter.exe.manifest
 C:\Users\Powel\source\repos\Tagsformatter\Tagsformatter\obj\Debug\Tagsformatter.application
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.csproj.AssemblyReference.cache
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\MainWindow.g.cs
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\App.g.cs
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter_MarkupCompile.cache
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter_MarkupCompile.lref
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\MainWindow.baml
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.g.resources
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.Properties.Resources.resources
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.csproj.GenerateResource.cache
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.csproj.CoreCompileInputs.cache
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.exe
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.pdb
