@@ -1,0 +1,43 @@
+﻿<Window x:Class="Tagsformatter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tagsformatter"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" Height="450" Width="450">
+    <Grid x:Name="MainLayout" Background="White" Width="450" Height="450" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="19*"/>
+            
+        </Grid.RowDefinitions>
+        <CheckBox x:Name="ThemeCheckbox" Content="Dark Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ThemeCheckbox_Checked" Unchecked="ThemeCheckbox_Unchecked"/>
+        <StackPanel x:Name="ContentStack" Background="White" HorizontalAlignment="Center" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
+            <Label x:Name="TitleLabel" Content="Tags Formater" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="Franklin Gothic Heavy" FontSize="25"/>
+            <Label x:Name="HeadingLabel" Content="Paste the text that you want formatting" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
+
+            <Border BorderThickness="1" BorderBrush="Black" Height="191" Width="304">
+                <TextBox x:Name="MainTextBox" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Height="191" Width="304" Background="White" CaretBrush="White" />
+
+
+            </Border>
+            
+            
+            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="red" FontFamily="Franklin Gothic Heavy"/>
+            <StackPanel x:Name="ContentType" Orientation="Horizontal" Background="red">
+                <RadioButton x:Name="YoutubeTags" Content="Youtube" Margin="20,10,0,10" HorizontalAlignment="Center" Width="65" Checked="YoutubeTags_Checked" FontFamily="Tahoma" FontSize="12" />
+                <RadioButton x:Name="InstagramTags" Content="Instagram" Margin="10,10,0,10"  HorizontalAlignment="Center" Width="75" Checked="InstagramTags_Checked" FontFamily="Tahoma"/>
+                <RadioButton x:Name="TIKTOKTags" Content="Tiktok" Margin="10,10,0,10" HorizontalAlignment="Center" Width="65" Checked="TIKTOKTags_Checked" FontFamily="Tahoma"/>
+                <RadioButton x:Name="FacebookTags" Content="Facebook" Margin="10,10,10,10" HorizontalAlignment="Center" Width="75" Checked="FacebookTags_Checked" FontFamily="Tahoma"/>
+                <RadioButton x:Name="TwitterTags" Content="Twitter" Margin="10,10,0,10" HorizontalAlignment="Center" Width="75" Checked="TwitterTags_Checked" FontFamily="Tahoma"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+    
+    
+</Window>
