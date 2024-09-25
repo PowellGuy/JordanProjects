@@ -51,10 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BD695EE0756804DFBE6D3EF1AB04DFD2A500A705</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DEBB373F6EEBA34233E091DFAC58D251F1DDB563</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Tagsformatter_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Tagsformatter_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -118,6 +118,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Tagsformatter_2_TemporaryKey.pfx" />
     <None Include="Tagsformatter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
