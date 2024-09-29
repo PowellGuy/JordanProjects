@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Net.Http;
 using System.Collections.Generic;
+using static System.Net.WebRequestMethods;
 
 
 
@@ -18,9 +19,9 @@ namespace Tagsformatter
     public partial class MainWindow : Window
     {
         //bool IsTagsSelected = false;
-        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5, URL = "https://best-hashtags.com/hashtag/deadrising/";
-
-
+        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5,
+            URL = "https://best-hashtags.com/hashtag/deadrising", URL2 = "https://www.tagsfinder.com/en-us/related/xbox/";
+        static readonly HttpClient HttpScrapeClient = new HttpClient();
 
         public MainWindow()
         {
@@ -218,21 +219,21 @@ namespace Tagsformatter
         //class for attempting to read url and add to a variable.
         private async Task BeginScrape()
         {
-            ConnectToURL();
+            Console.WriteLine("beginning connection to site: " + URL);
 
-            //Creates variable to handle Url and uses the HttpClient Class request connection to site
+            //Console.WriteLine("Here is the response " + ConnectionResponseString);
 
-            var HttpScrapeClient = new HttpClient();
-            var HtmlString = await HttpScrapeClient.GetStringAsync(URL);
+            string HtmlString = await HttpScrapeClient.GetStringAsync(URL);
 
-            //uses the HtmlDocument to handle the data from the chosen URL.
+            //uses the HtmlDocument object to handle the data taken from the chosen URL.
             var HttpDocHandler = new HtmlDocument();
             HttpDocHandler.LoadHtml(HtmlString);
 
-            //uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
+            ////uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
             var DivHandler = HttpDocHandler.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "")
-                .Contains("tag-box")).ToList();
+                .Where(node => node.GetAttributeValue("class", "").Contains("tag-box")).ToList();
+
+            //Console.WriteLine("You entered in the search bar: "); 
 
             //for each loop created to cycle through all the divs in the HTML page.
             foreach (var div in DivHandler)
@@ -241,36 +242,26 @@ namespace Tagsformatter
                 Console.WriteLine("Hashtags scraped");
                 break;
             }
+
+
+            //uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
+
+                      
+
+            //var SearchHandler = HttpDocHandler.DocumentNode.Descendants("div")
+            //    .Where(node => node.GetAttributeValue("class", "").Contains("instagram-hashtag-results")).ToList();
+
+            //SearchHandler[0].SetAttributeValue("value", "deadrising");
+            //Console.WriteLine(SearchHandler[0].GetAttributeValue("value", ""));
+
+
+            //foreach (var div2 in SearchHandler)
+            //{
+                
+            //    Console.WriteLine(div2.InnerText.Trim());
+            //    break;
+            //}
         }
-
-        private async Task ConnectToURL()
-        {
-            Console.WriteLine("beginning connection to site: " + URL);
-
-
-            var HttpConnectClient = new HttpClient();
-            var values = new Dictionary<string, string>
-            {
-                { "thing1", "hello" },
-                { "thing2", "world" }
-  };
-
-            var Connectioncontent = new FormUrlEncodedContent(values);
-
-            var response = await HttpConnectClient.PostAsync(URL, Connectioncontent);
-
-            var ConnectionResponseString = await response.Content.ReadAsStringAsync();
-
-            var responseString = await HttpConnectClient.GetStringAsync(URL);
-
-        }
-
-
-
-
-
-
-
-
     }
 }
+
