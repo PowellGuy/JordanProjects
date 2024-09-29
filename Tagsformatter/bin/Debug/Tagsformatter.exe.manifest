@@ -42,14 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tagsformatter.exe" size="15824">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HtmlAgilityPack.dll" size="171008">
+      <assemblyIdentity name="HtmlAgilityPack" version="1.11.66.0" publicKeyToken="BD319B19EAF3B43A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>EWavm9yOSz6bsBtLrr4MBbcXetvmdXjvxZ9/37YQxOQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tagsformatter.exe" size="20448">
       <assemblyIdentity name="Tagsformatter" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZgTo5xoulQfzacsqvabOmGK1j7rI1JgIhiBYZ7zn+Xc=</dsig:DigestValue>
+        <dsig:DigestValue>O4GnteMyllHvtP4FpEUT9Wxgy6LRHG+F4d3e/6i974s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

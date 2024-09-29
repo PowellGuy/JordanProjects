@@ -1,6 +1,12 @@
-﻿using System.Linq;
+﻿using HtmlAgilityPack;
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Net.Http;
+using System.Collections.Generic;
 
 
 
@@ -12,13 +18,14 @@ namespace Tagsformatter
     public partial class MainWindow : Window
     {
         //bool IsTagsSelected = false;
-        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
+        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5, URL = "https://best-hashtags.com/hashtag/deadrising/";
 
 
 
         public MainWindow()
         {
             InitializeComponent();
+            BeginScrape();
             ContentType.IsEnabled = false;
             ContentType.Background = Brushes.Yellow;
             ConvertButton.Background = Brushes.Yellow;
@@ -207,6 +214,60 @@ namespace Tagsformatter
                 ContentType.IsEnabled = false;
             }
         }
+
+        //class for attempting to read url and add to a variable.
+        private async Task BeginScrape()
+        {
+            ConnectToURL();
+
+            //Creates variable to handle Url and uses the HttpClient Class request connection to site
+
+            var HttpScrapeClient = new HttpClient();
+            var HtmlString = await HttpScrapeClient.GetStringAsync(URL);
+
+            //uses the HtmlDocument to handle the data from the chosen URL.
+            var HttpDocHandler = new HtmlDocument();
+            HttpDocHandler.LoadHtml(HtmlString);
+
+            //uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
+            var DivHandler = HttpDocHandler.DocumentNode.Descendants("div")
+                .Where(node => node.GetAttributeValue("class", "")
+                .Contains("tag-box")).ToList();
+
+            //for each loop created to cycle through all the divs in the HTML page.
+            foreach (var div in DivHandler)
+            {
+                Console.WriteLine(div.InnerText.Trim());
+                Console.WriteLine("Hashtags scraped");
+                break;
+            }
+        }
+
+        private async Task ConnectToURL()
+        {
+            Console.WriteLine("beginning connection to site: " + URL);
+
+
+            var HttpConnectClient = new HttpClient();
+            var values = new Dictionary<string, string>
+            {
+                { "thing1", "hello" },
+                { "thing2", "world" }
+  };
+
+            var Connectioncontent = new FormUrlEncodedContent(values);
+
+            var response = await HttpConnectClient.PostAsync(URL, Connectioncontent);
+
+            var ConnectionResponseString = await response.Content.ReadAsStringAsync();
+
+            var responseString = await HttpConnectClient.GetStringAsync(URL);
+
+        }
+
+
+
+
 
 
 

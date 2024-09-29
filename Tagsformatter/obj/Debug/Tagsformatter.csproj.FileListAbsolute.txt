@@ -29,3 +29,14 @@ C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.csproj.Gen
 C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.csproj.CoreCompileInputs.cache
 C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.exe
 C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.pdb
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\Tagsformatter.exe.config
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\Tagsformatter.exe.manifest
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\Tagsformatter.application
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\Tagsformatter.exe
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\Tagsformatter.pdb
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\HtmlAgilityPack.dll
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\HtmlAgilityPack.pdb
+C:\Code Projects\JordanProjects\Tagsformatter\bin\Debug\HtmlAgilityPack.xml
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.exe.manifest
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsformatter.application
+C:\Code Projects\JordanProjects\Tagsformatter\obj\Debug\Tagsform.F61300CA.Up2Date
