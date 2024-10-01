@@ -26,7 +26,7 @@
             </Border>
             
             
-            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="red" FontFamily="Franklin Gothic Heavy"/>
+            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="red" FontFamily="Franklin Gothic Heavy" MouseEnter="ConvertButton_MouseEnter" MouseLeave="ConvertButton_MouseLeave"/>
             <StackPanel x:Name="ContentType" Orientation="Horizontal" Background="red">
                 <RadioButton x:Name="YoutubeTags" Content="Youtube" Margin="20,10,0,10" HorizontalAlignment="Center" Width="65" Checked="YoutubeTags_Checked" FontFamily="Tahoma" FontSize="12" />
                 <RadioButton x:Name="InstagramTags" Content="Instagram" Margin="10,10,0,10"  HorizontalAlignment="Center" Width="75" Checked="InstagramTags_Checked" FontFamily="Tahoma"/>

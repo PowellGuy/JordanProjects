@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Net.Http;
 using System.Collections.Generic;
 using static System.Net.WebRequestMethods;
+using System.Windows.Shapes;
+//using System.Drawing;
 
 
 
@@ -27,7 +29,7 @@ namespace Tagsformatter
         {
             InitializeComponent();
             BeginScrape();
-            ContentType.IsEnabled = false;
+            ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
             ContentType.Background = Brushes.Yellow;
             ConvertButton.Background = Brushes.Yellow;
 
@@ -35,18 +37,45 @@ namespace Tagsformatter
 
         private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            ContentStack.Background = Brushes.SlateGray;
-            MainLayout.Background = Brushes.SlateGray;
-            HeadingLabel.Background = Brushes.SlateGray;
-            MainTextBox.Background = Brushes.SlateGray;
+            // Set background using hex color in C#
+            string hexColor = "#191A1F";
+            string hexColor2 = "#3C3F47";
+            var brushConverter = new BrushConverter();   
+
+            ContentStack.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            MainLayout.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            HeadingLabel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            MainTextBox.Background = (Brush)brushConverter.ConvertFromString(hexColor);
 
             HeadingLabel.Foreground = Brushes.White;
             TitleLabel.Foreground = Brushes.White;
             MainTextBox.Foreground = Brushes.White;
-
             MainTextBox.CaretBrush = Brushes.White;
             ThemeCheckbox.Foreground = Brushes.White;
+            YoutubeTags.Foreground = Brushes.White;
+            InstagramTags.Foreground = Brushes.White;
+            TIKTOKTags.Foreground = Brushes.White;
+            FacebookTags.Foreground = Brushes.White;
+            TwitterTags.Foreground = Brushes.White;
 
+            
+            ContentType.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+            ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+            ConvertButton.Foreground = Brushes.White;
+
+        }
+
+        private void ConvertButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //ConvertButton.Background = Brushes.White;
+            //ConvertButton.Foreground = Brushes.Black;
+        }
+
+        private void ConvertButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //string hexColor2 = "#3C3F47";
+            //var brushConverter = new BrushConverter();
+            //ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
         }
 
         private void ThemeCheckbox_Unchecked(object sender, RoutedEventArgs e)
@@ -62,7 +91,6 @@ namespace Tagsformatter
 
             MainTextBox.CaretBrush = Brushes.Black;
             ThemeCheckbox.Foreground = Brushes.Black;
-
         }
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
