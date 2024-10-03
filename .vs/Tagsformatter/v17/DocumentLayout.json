@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Code Projects\\JordanProjects\\",
+  "WorkspaceRootPath": "C:\\TagsFormatter\\JordanProjects\\JordanProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|c:\\code projects\\jordanprojects\\tagsformatter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|c:\\tagsformatter\\jordanprojects\\jordanprojects\\tagsformatter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|solutionrelative:tagsformatter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|C:\\Code Projects\\JordanProjects\\tagsformatter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|C:\\TagsFormatter\\JordanProjects\\JordanProjects\\tagsformatter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{66B20B7C-A871-4ABA-BFE6-AA4F453C1551}|Tagsformatter\\Tagsformatter.csproj|solutionrelative:tagsformatter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -18,21 +18,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Code Projects\\JordanProjects\\Tagsformatter\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\TagsFormatter\\JordanProjects\\JordanProjects\\Tagsformatter\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Tagsformatter\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Code Projects\\JordanProjects\\Tagsformatter\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\TagsFormatter\\JordanProjects\\JordanProjects\\Tagsformatter\\MainWindow.xaml.cs",
               "RelativeToolTip": "Tagsformatter\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAswAoBAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-27T23:58:41.506Z",
               "EditorCaption": ""
@@ -41,9 +45,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Code Projects\\JordanProjects\\Tagsformatter\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\TagsFormatter\\JordanProjects\\JordanProjects\\Tagsformatter\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Tagsformatter\\MainWindow.xaml",
-              "ToolTip": "C:\\Code Projects\\JordanProjects\\Tagsformatter\\MainWindow.xaml",
+              "ToolTip": "C:\\TagsFormatter\\JordanProjects\\JordanProjects\\Tagsformatter\\MainWindow.xaml",
               "RelativeToolTip": "Tagsformatter\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-09-27T23:46:02.604Z",

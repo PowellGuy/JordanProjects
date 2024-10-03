@@ -9,6 +9,10 @@ using System.Net.Http;
 using System.Collections.Generic;
 using static System.Net.WebRequestMethods;
 using System.Windows.Shapes;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+
 //using System.Drawing;
 
 
@@ -244,6 +248,28 @@ namespace Tagsformatter
             }
         }
 
+        private void  SelenuiumScrape ()
+        {
+            using (IWebDriver SelenuimDriver = new ChromeDriver())
+            {
+                SelenuimDriver.Navigate().GoToUrl(URL);
+
+                IWebElement WebsiteSearchBar = SelenuimDriver.FindElement(By.Id(""));
+                WebsiteSearchBar.SendKeys("Dead Rising");
+
+                IWebElement WebsiteSubmitButton = SelenuimDriver.FindElement(By.Id(""));
+                WebsiteSubmitButton.Click();
+
+                SelenuimDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
+                IWebElement WebsiteResult = SelenuimDriver.FindElement(By.Id(""));
+
+                Console.WriteLine();
+
+
+            }
+        }
+
         //class for attempting to read url and add to a variable.
         private async Task BeginScrape()
         {
@@ -271,10 +297,12 @@ namespace Tagsformatter
                 break;
             }
 
+            
+
 
             //uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
 
-                      
+
 
             //var SearchHandler = HttpDocHandler.DocumentNode.Descendants("div")
             //    .Where(node => node.GetAttributeValue("class", "").Contains("instagram-hashtag-results")).ToList();
@@ -285,7 +313,7 @@ namespace Tagsformatter
 
             //foreach (var div2 in SearchHandler)
             //{
-                
+
             //    Console.WriteLine(div2.InnerText.Trim());
             //    break;
             //}
