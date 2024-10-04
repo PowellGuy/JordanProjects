@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <CheckBox x:Name="ThemeCheckbox" Content="Dark Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ThemeCheckbox_Checked" Unchecked="ThemeCheckbox_Unchecked"/>
         <StackPanel x:Name="ContentStack" Background="White" HorizontalAlignment="Center" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
-            <Label x:Name="TitleLabel" Content="Tags Formater" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="Franklin Gothic Heavy" FontSize="25"/>
+            <Label x:Name="TitleLabel" Content="Tags Formatter" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="Franklin Gothic Heavy" FontSize="25"/>
             <Label x:Name="HeadingLabel" Content="Paste the text that you want formatting" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
 
             <Border BorderThickness="1" BorderBrush="Black" Height="191" Width="304">
@@ -26,8 +26,8 @@
             </Border>
             
             
-            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="red" FontFamily="Franklin Gothic Heavy" MouseEnter="ConvertButton_MouseEnter" MouseLeave="ConvertButton_MouseLeave"/>
-            <StackPanel x:Name="ContentType" Orientation="Horizontal" Background="red">
+            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="yellow" FontFamily="Franklin Gothic Heavy" MouseEnter="ConvertButton_MouseEnter" MouseLeave="ConvertButton_MouseLeave"/>
+            <StackPanel x:Name="ContentType" Orientation="Horizontal" Background="Yellow">
                 <RadioButton x:Name="YoutubeTags" Content="Youtube" Margin="20,10,0,10" HorizontalAlignment="Center" Width="65" Checked="YoutubeTags_Checked" FontFamily="Tahoma" FontSize="12" />
                 <RadioButton x:Name="InstagramTags" Content="Instagram" Margin="10,10,0,10"  HorizontalAlignment="Center" Width="75" Checked="InstagramTags_Checked" FontFamily="Tahoma"/>
                 <RadioButton x:Name="TIKTOKTags" Content="Tiktok" Margin="10,10,0,10" HorizontalAlignment="Center" Width="65" Checked="TIKTOKTags_Checked" FontFamily="Tahoma"/>
