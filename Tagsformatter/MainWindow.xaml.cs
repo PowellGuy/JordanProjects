@@ -18,9 +18,6 @@ using System.Linq.Expressions;
 
 
 //using System.Drawing;
-
-
-
 namespace Tagsformatter
 {
     /// <summary>
@@ -28,22 +25,17 @@ namespace Tagsformatter
     /// </summary>
     public partial class MainWindow : Window
     {
-        //bool IsTagsSelected = false;
-        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5,
-        URL = "https://best-hashtags.com/hashtag/deadrising", URL2 = "https://www.tagsfinder.com/en-us/related/xbox/";
-        static readonly HttpClient HttpScrapeClient = new HttpClient();
-
+        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
+       
         public MainWindow()
         {
             InitializeComponent();
-            BeginScrape();
-            SelenuiumScrape();
             ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
         }
 
-        private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
+        private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e) 
         {
-            // Set background using hex color in C#
+            //Set background using hex color in C#
             string hexColor = "#191A1F";
             string hexColor2 = "#3C3F47";
             var brushConverter = new BrushConverter();
@@ -67,19 +59,6 @@ namespace Tagsformatter
             ContentType.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
             ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
             ConvertButton.Foreground = Brushes.White;
-        }
-
-        private void ConvertButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            //ConvertButton.Background = Brushes.White;
-            //ConvertButton.Foreground = Brushes.Black;
-        }
-
-        private void ConvertButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            //string hexColor2 = "#3C3F47";
-            //var brushConverter = new BrushConverter();
-            //ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
         }
 
         private void ThemeCheckbox_Unchecked(object sender, RoutedEventArgs e)
@@ -110,79 +89,40 @@ namespace Tagsformatter
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {
-            int Hashtagcounter;
-            string ConvertToString;
-
-            if (MainTextBox.Text == "" || MainTextBox.Text.Contains("#") != true)
+            if (MainTextBox.Text == "")
             {
-                MessageBox.Show("No Hashtag to convert, try again.");
+                MessageBox.Show("Please enter search term to convert");
+                this.Close();
             }
 
-            if (MainTextBox.Text.Contains("#"))
-            {
-                Hashtagcounter = MainTextBox.Text.Count(x => x == '#');
-                ConvertToString = Hashtagcounter.ToString();
-
-                if (Hashtagcounter > 5)
-                {
-                    input = MainTextBox.Text;
-                    ContentType.IsEnabled = true;
-                }
-
-                else
-                {
-                    MessageBox.Show("Please convert at least 5 hashtags.");
-                }
-            }
             else
             {
+                SelenuiumScrape();
                 ContentType.IsEnabled = true;
                 input = MainTextBox.Text;
             }
         }
 
-        public void YoutubeTags_Checked(object sender, RoutedEventArgs e)
+        private void YoutubeTags_Checked(object sender, RoutedEventArgs e)
         {
-            if (ContentType.IsEnabled == true)
-            {
                 HeadingLabel.Content = "Youtube";
-
                 trim = input.Replace("#", "");
                 trim = trim.Replace(" ", ",");
                 MainTextBox.Text = trim;
                 ContentType.Background = Brushes.Red;
                 ConvertButton.Background = Brushes.Red;
-            }
-
-            else
-            {
-                ContentType.IsEnabled = false;
-            }
         }
 
-        public void InstagramTags_Checked(object sender, RoutedEventArgs e)
+        private void InstagramTags_Checked(object sender, RoutedEventArgs e)
         {
-            if (ContentType.IsEnabled == true)
-            {
-                //IsTagsSelected = true;
                 HeadingLabel.Content = "Instagram";
                 ContentType.Background = Brushes.MediumPurple;
                 ConvertButton.Background = Brushes.MediumPurple;
-                MainTextBox.Text = input;
-            }
-
-            else
-            {
-                ContentType.IsEnabled = false;
-            }
+                MainTextBox.Text = input;          
         }
 
-        public void TIKTOKTags_Checked(object sender, RoutedEventArgs e)
+        private void TIKTOKTags_Checked(object sender, RoutedEventArgs e)
         {
-            if (ContentType.IsEnabled == true)
-            {
-                HeadingLabel.Content = "Tiktok";
-
                 inputText1 = input.Split(' ')[1].Trim();
                 inputText2 = input.Split(' ')[2].Trim();
                 inputText3 = input.Split(' ')[3].Trim();
@@ -190,18 +130,10 @@ namespace Tagsformatter
                 MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + "#fyp";
                 ContentType.Background = Brushes.HotPink;
                 ConvertButton.Background = Brushes.HotPink;
-            }
-
-            else
-            {
-                ContentType.IsEnabled = false;
-            }
         }
 
         private void FacebookTags_Checked(object sender, RoutedEventArgs e)
         {
-            if (ContentType.IsEnabled == true)
-            {
                 HeadingLabel.Content = "Facebook";
 
                 inputText1 = input.Split(' ')[1].Trim();
@@ -213,18 +145,10 @@ namespace Tagsformatter
                 MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + inputText4 + " " + inputText5;
                 ContentType.Background = Brushes.CornflowerBlue;
                 ConvertButton.Background = Brushes.CornflowerBlue;
-            }
-
-            else
-            {
-                ContentType.IsEnabled = false;
-            }
         }
 
         private void TwitterTags_Checked(object sender, RoutedEventArgs e)
         {
-            if (ContentType.IsEnabled == true)
-            {
                 HeadingLabel.Content = "Twitter";
 
                 inputText1 = input.Split(' ')[1].Trim();
@@ -234,12 +158,6 @@ namespace Tagsformatter
 
                 ContentType.Background = Brushes.DeepSkyBlue;
                 ConvertButton.Background = Brushes.DeepSkyBlue;
-            }
-
-            else
-            {
-                ContentType.IsEnabled = false;
-            }
         }
 
         private void SelenuiumScrape()
@@ -252,7 +170,9 @@ namespace Tagsformatter
 
                 //Creating webelement to handing Searchbar and button functionality, via find ID.
                 IWebElement WebsiteSearchBar = SelenuimDriver.FindElement(By.Id("html-input-span-1"));
-                WebsiteSearchBar.SendKeys("DeadRising");
+
+                WebsiteSearchBar.SendKeys(MainTextBox.Text);
+                
 
                 //action for the enter key.
                 new Actions(SelenuimDriver)
@@ -266,36 +186,10 @@ namespace Tagsformatter
                 if (Delay != null)
                 {
                     IWebElement WebsiteResult = SelenuimDriver.FindElement(By.ClassName("instagram-hashtag-results"));
-                    MainTextBox.Text += WebsiteResult.Text;
+                    MainTextBox.Text += WebsiteResult.Text;                                   
                 }
-            } 
-        }
-
-        //class for attempting to read url and add to a variable.
-        private async Task BeginScrape()
-        {
-            Console.WriteLine("beginning connection to site: " + URL);
-
-            string HtmlString = await HttpScrapeClient.GetStringAsync(URL);
-
-            //uses the HtmlDocument object to handle the data taken from the chosen URL.
-            var HttpDocHandler = new HtmlDocument();
-            HttpDocHandler.LoadHtml(HtmlString);
-
-            ////uses the HTMLDocument class to collect the specific tags/keywords and parses them into a list.
-            var DivHandler = HttpDocHandler.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "").Contains("tag-box")).ToList();
-
-            //Console.WriteLine("You entered in the search bar: "); 
-
-            //for each loop created to cycle through all the divs in the HTML page.
-            foreach (var div in DivHandler)
-            {
-                Console.WriteLine(div.InnerText.Trim());
-                Console.WriteLine("Hashtags scraped");
-                break;
             }
-        }
+        }                      
     }
 }
 
