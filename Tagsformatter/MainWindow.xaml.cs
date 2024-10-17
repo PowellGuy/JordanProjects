@@ -5,16 +5,18 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Net.Http;
+//using System.Net.Http;
 using System.Collections.Generic;
 using static System.Net.WebRequestMethods;
 using System.Windows.Shapes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-using System;
+//using System;
 using OpenQA.Selenium.BiDi.Communication.Transport;
 using System.Linq.Expressions;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 
 //using System.Drawing;
@@ -23,6 +25,12 @@ namespace Tagsformatter
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    public class TrendsInfo
+    {
+        public string _Relatedtopics { get; set; }
+        public string _Relatedqueries { get; set; }
+    }
     public partial class MainWindow : Window
     {
         string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
@@ -40,7 +48,7 @@ namespace Tagsformatter
             string hexColor2 = "#3C3F47";
             var brushConverter = new BrushConverter();
             
-            ContentStack.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            ContentStackLeft.Background = (Brush)brushConverter.ConvertFromString(hexColor);
             MainLayout.Background = (Brush)brushConverter.ConvertFromString(hexColor);
             HeadingLabel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
             MainTextBox.Background = (Brush)brushConverter.ConvertFromString(hexColor);
@@ -63,7 +71,7 @@ namespace Tagsformatter
 
         private void ThemeCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ContentStack.Background = Brushes.White;
+            ContentStackLeft.Background = Brushes.White;
             MainLayout.Background = Brushes.White;
             HeadingLabel.Background = Brushes.White;
             MainTextBox.Background = Brushes.White;
@@ -100,6 +108,8 @@ namespace Tagsformatter
                 SelenuiumScrape();
                 ContentType.IsEnabled = true;
                 input = MainTextBox.Text;
+                           
+                
             }
         }
 
@@ -160,11 +170,13 @@ namespace Tagsformatter
                 ConvertButton.Background = Brushes.DeepSkyBlue;
         }
 
-        private void SelenuiumScrape()
+        public void SelenuiumScrape()
         {
             //uses chromedriver class from Selenuim Package to create webdriver.
             using (IWebDriver SelenuimDriver = new ChromeDriver())
             {
+
+
                 //Navigates to the URL
                 SelenuimDriver.Navigate().GoToUrl("https://app.sistrix.com/en/instagram-hashtags");
 
@@ -173,7 +185,6 @@ namespace Tagsformatter
 
                 WebsiteSearchBar.SendKeys(MainTextBox.Text);
                 
-
                 //action for the enter key.
                 new Actions(SelenuimDriver)
                   .KeyDown(Keys.Shift)
@@ -185,11 +196,37 @@ namespace Tagsformatter
 
                 if (Delay != null)
                 {
+
                     IWebElement WebsiteResult = SelenuimDriver.FindElement(By.ClassName("instagram-hashtag-results"));
-                    MainTextBox.Text += WebsiteResult.Text;                                   
+                    MainTextBox.Text += WebsiteResult.Text;
+
+                    string[] TrendingResults =
+                        {
+                            WebsiteResult.Text.Split('#')[1].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
+                            WebsiteResult.Text.Split('#')[1].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
+                            WebsiteResult.Text.Split('#')[1].Trim()
+                        };
+                
+                    //This splits the string containing the hashtags by # and stores them into a variable.
+                    //var Item2 = WebsiteResult.Text.Split('#')[1].Trim();
+                    //var Item3 = WebsiteResult.Text.Split('#')[2].Trim();
+                    //var Item4 = WebsiteResult.Text.Split('#')[3].Trim();
+                    //var Item5 = WebsiteResult.Text.Split('#')[4].Trim();
+                    //var Item1 = WebsiteResult.Text.Split('#')[5].Trim();
+
+                    List<TrendsInfo> TrendResults = new List<TrendsInfo>();
+                    //TrendResults.Add(new TrendsInfo() { _Relatedqueries = WebsiteResult.Text, _Relatedtopics = "Test2" });                    
+                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[0], _Relatedqueries = "Test2" });
+                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[1], _Relatedqueries = "Test2" });
+                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[2], _Relatedqueries = "Test2" });
+                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[3], _Relatedqueries = "Test2" });
+                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[4], _Relatedqueries = "Test2" });
+
+                    TrendsList.ItemsSource = TrendResults;
+              
                 }
             }
         }                      
-    }
+    }  
 }
 

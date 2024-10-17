@@ -42,30 +42,20 @@
             <Label x:Name="TitleLabelRight" Content="List" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="ObelixPro" FontSize="25"/>
             <Label x:Name="HeadingLabelRight" Content="Google Trends - Trending Topics" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
 
-            <!--<ListView ItemsSource="{Binding Source={StaticResource EmployeeInfoDataSource}}">
-
+            <ListView x:Name="TrendsList" Margin="0,0,0,0" VerticalAlignment="Center" Height="191" Width="304" Background="White" BorderBrush="Black" BorderThickness="1">
+            
                 <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding _Relatedtopics}" Header="Related topics" Width="152"/>
+                           
+                        <GridViewColumn DisplayMemberBinding="{Binding _Relatedqueries}" Header="Related queries" Width="152"/>
 
-                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="First Name" Width="100"/>
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" Width="100">
-                            <GridViewColumnHeader>Last Name
-                                <GridViewColumnHeader.ContextMenu>
-                                    <ContextMenu MenuItem.Click="LastNameCM_Click" Name="LastNameCM">
-                                        <MenuItem Header="Ascending" />
-                                        <MenuItem Header="Descending" />
-                                    </ContextMenu>
-                                </GridViewColumnHeader.ContextMenu>
-                            </GridViewColumnHeader>
-                        </GridViewColumn>
-
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Employee No." Width="100"/>
                     </GridView>
-
                 </ListView.View>
-            </ListView>-->
+
+
+
+            </ListView>
 
 
         </StackPanel>
