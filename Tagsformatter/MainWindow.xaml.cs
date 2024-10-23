@@ -17,7 +17,19 @@ using OpenQA.Selenium.BiDi.Communication.Transport;
 using System.Linq.Expressions;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Xml.Linq;
+//using Youtube Api
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Services;
+using Google.Apis.Upload;
+using Google.Apis.Util.Store;
+using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
 
+
+
+using Newtonsoft.Json.Linq;
+using System.Diagnostics.Contracts;
 
 //using System.Drawing;
 namespace Tagsformatter
@@ -34,20 +46,25 @@ namespace Tagsformatter
     public partial class MainWindow : Window
     {
         string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
-       
+
         public MainWindow()
         {
+
             InitializeComponent();
+            Run();
             ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
+
+            //YoutubeSearchSuggestions();
+            //SelenuiumScrape2Async();
         }
 
-        private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e) 
+        private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             //Set background using hex color in C#
             string hexColor = "#191A1F";
             string hexColor2 = "#3C3F47";
             var brushConverter = new BrushConverter();
-            
+
             ContentStackLeft.Background = (Brush)brushConverter.ConvertFromString(hexColor);
             MainLayout.Background = (Brush)brushConverter.ConvertFromString(hexColor);
             HeadingLabel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
@@ -108,66 +125,66 @@ namespace Tagsformatter
                 SelenuiumScrape();
                 ContentType.IsEnabled = true;
                 input = MainTextBox.Text;
-                           
-                
+
+
             }
         }
 
         private void YoutubeTags_Checked(object sender, RoutedEventArgs e)
         {
-                HeadingLabel.Content = "Youtube";
-                trim = input.Replace("#", "");
-                trim = trim.Replace(" ", ",");
-                MainTextBox.Text = trim;
-                ContentType.Background = Brushes.Red;
-                ConvertButton.Background = Brushes.Red;
+            HeadingLabel.Content = "Youtube";
+            trim = input.Replace("#", "");
+            trim = trim.Replace(" ", ",");
+            MainTextBox.Text = trim;
+            ContentType.Background = Brushes.Red;
+            ConvertButton.Background = Brushes.Red;
         }
 
         private void InstagramTags_Checked(object sender, RoutedEventArgs e)
         {
-                HeadingLabel.Content = "Instagram";
-                ContentType.Background = Brushes.MediumPurple;
-                ConvertButton.Background = Brushes.MediumPurple;
-                MainTextBox.Text = input;          
+            HeadingLabel.Content = "Instagram";
+            ContentType.Background = Brushes.MediumPurple;
+            ConvertButton.Background = Brushes.MediumPurple;
+            MainTextBox.Text = input;
         }
 
         private void TIKTOKTags_Checked(object sender, RoutedEventArgs e)
         {
-                inputText1 = input.Split(' ')[1].Trim();
-                inputText2 = input.Split(' ')[2].Trim();
-                inputText3 = input.Split(' ')[3].Trim();
+            inputText1 = input.Split(' ')[1].Trim();
+            inputText2 = input.Split(' ')[2].Trim();
+            inputText3 = input.Split(' ')[3].Trim();
 
-                MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + "#fyp";
-                ContentType.Background = Brushes.HotPink;
-                ConvertButton.Background = Brushes.HotPink;
+            MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + "#fyp";
+            ContentType.Background = Brushes.HotPink;
+            ConvertButton.Background = Brushes.HotPink;
         }
 
         private void FacebookTags_Checked(object sender, RoutedEventArgs e)
         {
-                HeadingLabel.Content = "Facebook";
+            HeadingLabel.Content = "Facebook";
 
-                inputText1 = input.Split(' ')[1].Trim();
-                inputText2 = input.Split(' ')[2].Trim();
-                inputText3 = input.Split(' ')[3].Trim();
-                inputText4 = input.Split(' ')[4].Trim();
-                inputText5 = input.Split(' ')[5].Trim();
+            inputText1 = input.Split(' ')[1].Trim();
+            inputText2 = input.Split(' ')[2].Trim();
+            inputText3 = input.Split(' ')[3].Trim();
+            inputText4 = input.Split(' ')[4].Trim();
+            inputText5 = input.Split(' ')[5].Trim();
 
-                MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + inputText4 + " " + inputText5;
-                ContentType.Background = Brushes.CornflowerBlue;
-                ConvertButton.Background = Brushes.CornflowerBlue;
+            MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + inputText4 + " " + inputText5;
+            ContentType.Background = Brushes.CornflowerBlue;
+            ConvertButton.Background = Brushes.CornflowerBlue;
         }
 
         private void TwitterTags_Checked(object sender, RoutedEventArgs e)
         {
-                HeadingLabel.Content = "Twitter";
+            HeadingLabel.Content = "Twitter";
 
-                inputText1 = input.Split(' ')[1].Trim();
-                inputText2 = input.Split(' ')[2].Trim();
+            inputText1 = input.Split(' ')[1].Trim();
+            inputText2 = input.Split(' ')[2].Trim();
 
-                MainTextBox.Text = inputText1 + " " + inputText2;
+            MainTextBox.Text = inputText1 + " " + inputText2;
 
-                ContentType.Background = Brushes.DeepSkyBlue;
-                ConvertButton.Background = Brushes.DeepSkyBlue;
+            ContentType.Background = Brushes.DeepSkyBlue;
+            ConvertButton.Background = Brushes.DeepSkyBlue;
         }
 
         public void SelenuiumScrape()
@@ -184,7 +201,7 @@ namespace Tagsformatter
                 IWebElement WebsiteSearchBar = SelenuimDriver.FindElement(By.Id("html-input-span-1"));
 
                 WebsiteSearchBar.SendKeys(MainTextBox.Text);
-                
+
                 //action for the enter key.
                 new Actions(SelenuimDriver)
                   .KeyDown(Keys.Shift)
@@ -202,17 +219,10 @@ namespace Tagsformatter
 
                     string[] TrendingResults =
                         {
-                            WebsiteResult.Text.Split('#')[1].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
-                            WebsiteResult.Text.Split('#')[1].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
-                            WebsiteResult.Text.Split('#')[1].Trim()
+                            WebsiteResult.Text.Split('#')[0].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
+                            WebsiteResult.Text.Split('#')[2].Trim(), WebsiteResult.Text.Split('#')[3].Trim(),
+                            WebsiteResult.Text.Split('#')[4].Trim()
                         };
-                
-                    //This splits the string containing the hashtags by # and stores them into a variable.
-                    //var Item2 = WebsiteResult.Text.Split('#')[1].Trim();
-                    //var Item3 = WebsiteResult.Text.Split('#')[2].Trim();
-                    //var Item4 = WebsiteResult.Text.Split('#')[3].Trim();
-                    //var Item5 = WebsiteResult.Text.Split('#')[4].Trim();
-                    //var Item1 = WebsiteResult.Text.Split('#')[5].Trim();
 
                     List<TrendsInfo> TrendResults = new List<TrendsInfo>();
                     //TrendResults.Add(new TrendsInfo() { _Relatedqueries = WebsiteResult.Text, _Relatedtopics = "Test2" });                    
@@ -223,10 +233,73 @@ namespace Tagsformatter
                     TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[4], _Relatedqueries = "Test2" });
 
                     TrendsList.ItemsSource = TrendResults;
-              
+
                 }
             }
-        }                      
-    }  
+        }
+
+        private async Task Run()
+        {
+
+        }
+    }
 }
 
+    //    public async Task YoutubeSearchSuggestions()
+    //    {
+    //        // URL for the Google Trends API request
+    //        var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+    //        {
+    //            ApiKey = "", 
+    //            ApplicationName = this.GetType().ToString()
+    //        });
+
+    //        var searchListRequest = youtubeService.Search.List("snippet");
+    //        searchListRequest.Q = "Deadrising"; // Replace with your search term.
+    //        searchListRequest.MaxResults = 5;
+
+    //        var searchListResponse = await searchListRequest.ExecuteAsync();
+
+    //        List<string> videos = new List<string>();
+
+    //        // Add each result to the appropriate list, and then display the lists of
+    //        // matching videos, channels, and playlists.
+    //        foreach (var searchResult in searchListResponse.Items)
+    //        {
+    //            videos.Add(String.Format("{0} ({1})", searchResult.Snippet.Title, searchResult.Id.VideoId));
+    //            break;
+    //        }
+
+    //        Console.WriteLine(String.Format("Videos:\n{0}\n", string.Join("\n", videos)));
+    //    }
+    //}
+
+
+
+
+
+//    {
+//        try
+//        {
+//            // Send the request and get the response as a string
+//            string GT_UrlResponse = await client.GetStringAsync(url);
+
+//            // Clean up the response by removing the prefix ")]}',"
+//            string GT_CleanedResponse = GT_UrlResponse.Replace(")]}',", "");
+
+//            // Parse the cleaned response as JSON
+//            JObject GT_jsonData = JObject.Parse(GT_CleanedResponse);
+
+//            // A foreach loop used to extract the topics from the JSON object, by placing the data into the array and iterate over each topic.
+//            var GT_Relatedtopics = GT_jsonData["default"]["topics"];
+//            int index = 1;
+//            foreach (var topic in GT_Relatedtopics)
+//            {
+//                Console.WriteLine($"Topic {index++}: {topic}");
+//            }
+//        }
+//        catch (Exception ex)
+//        {
+//            Console.WriteLine($"Error: {ex.Message}");
+//        }
+//    }

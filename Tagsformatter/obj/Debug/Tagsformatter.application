@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Tagsformatter.exe.manifest" size="12362">
+    <dependentAssembly dependencyType="install" codebase="Tagsformatter.exe.manifest" size="16473">
       <assemblyIdentity name="Tagsformatter.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ktrIdtx85QO9QD0QkSDPw+KN2ZN/YPEnWTq0PmN7o6E=</dsig:DigestValue>
+        <dsig:DigestValue>GyL91h5z+SqxNrLwFr9OueDIQBGKtqokOhEZ0Fr5jSU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
