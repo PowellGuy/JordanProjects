@@ -51,11 +51,11 @@ namespace Tagsformatter
         {
 
             InitializeComponent();
-            Run();
-            ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
 
-            //YoutubeSearchSuggestions();
+            ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
             //SelenuiumScrape2Async();
+
+            YoutubePopularVideos();
         }
 
         private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
@@ -238,41 +238,73 @@ namespace Tagsformatter
             }
         }
 
-        private async Task Run()
+        public async Task YoutubePopularVideos()
         {
+            var Service = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = "AIzaSyBd4TxXE_Ibljhw5QQUqZE3NZOutyc-Ej4"
+            });
 
+            var Videorequest = Service.Search.List("snippet");
+            Videorequest.Q = "DeadRising";
+            Videorequest.MaxResults = 5;
+
+            //Videorequest.Chart = VideosResource.ListRequest.ChartEnum.MostPopular;
+            //Videorequest.RegionCode = "gb";
+
+            var Results = await Videorequest.ExecuteAsync();
+
+            List<string> videos = new List<string>();
+
+            if (Results.Items.Count <= 0)
+            {
+                Console.WriteLine("No videos found");
+                this.Close();
+            }
+
+            foreach (var PopluarVideo in Results.Items)
+            {
+                //Console.WriteLine($"{PopluarVideo.Snippet.Title} (https://www.youtube.com/watch?v={PopluarVideo.Id}");
+               //TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[0], _Relatedqueries = "Test2" });
+                videos.Add(String.Format("{0} ({1})", PopluarVideo.Snippet.Title, PopluarVideo.Id.VideoId));
+                
+            }
+            MainTextBox.Text = string.Join("\n", videos);
+            //Console.WriteLine(String.Format("Videos:\n{0}\n", string.Join("\n", videos)));
         }
     }
 }
 
-    //    public async Task YoutubeSearchSuggestions()
-    //    {
-    //        // URL for the Google Trends API request
-    //        var youtubeService = new YouTubeService(new BaseClientService.Initializer()
-    //        {
-    //            ApiKey = "", 
-    //            ApplicationName = this.GetType().ToString()
-    //        });
 
-    //        var searchListRequest = youtubeService.Search.List("snippet");
-    //        searchListRequest.Q = "Deadrising"; // Replace with your search term.
-    //        searchListRequest.MaxResults = 5;
 
-    //        var searchListResponse = await searchListRequest.ExecuteAsync();
+//    public async Task YoutubeSearchSuggestions()
+//    {
+//        // URL for the Google Trends API request
+//        var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+//        {
+//            ApiKey = "", 
+//            ApplicationName = this.GetType().ToString()
+//        });
 
-    //        List<string> videos = new List<string>();
+//        var searchListRequest = youtubeService.Search.List("snippet");
+//        searchListRequest.Q = "Deadrising"; // Replace with your search term.
+//        searchListRequest.MaxResults = 5;
 
-    //        // Add each result to the appropriate list, and then display the lists of
-    //        // matching videos, channels, and playlists.
-    //        foreach (var searchResult in searchListResponse.Items)
-    //        {
-    //            videos.Add(String.Format("{0} ({1})", searchResult.Snippet.Title, searchResult.Id.VideoId));
-    //            break;
-    //        }
+//        var searchListResponse = await searchListRequest.ExecuteAsync();
 
-    //        Console.WriteLine(String.Format("Videos:\n{0}\n", string.Join("\n", videos)));
-    //    }
-    //}
+//        List<string> videos = new List<string>();
+
+//        // Add each result to the appropriate list, and then display the lists of
+//        // matching videos, channels, and playlists.
+//        foreach (var searchResult in searchListResponse.Items)
+//        {
+//            videos.Add(String.Format("{0} ({1})", searchResult.Snippet.Title, searchResult.Id.VideoId));
+//            break;
+//        }
+
+//        Console.WriteLine(String.Format("Videos:\n{0}\n", string.Join("\n", videos)));
+//    }
+//}
 
 
 
