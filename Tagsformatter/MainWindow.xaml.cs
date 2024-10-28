@@ -240,12 +240,12 @@ namespace Tagsformatter
 
         public async Task YoutubePopularVideos()
         {
-            var Service = new YouTubeService(new BaseClientService.Initializer()
+            var YTService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyBd4TxXE_Ibljhw5QQUqZE3NZOutyc-Ej4"
+                ApiKey = ""
             });
 
-            var Videorequest = Service.Search.List("snippet");
+            var Videorequest = YTService.Search.List("snippet");
             Videorequest.Q = "DeadRising";
             Videorequest.MaxResults = 5;
 
