@@ -30,6 +30,7 @@ using Google.Apis.YouTube.v3.Data;
 
 using Newtonsoft.Json.Linq;
 using System.Diagnostics.Contracts;
+using System.Windows.Controls.Primitives;
 
 //using System.Drawing;
 namespace Tagsformatter
@@ -51,11 +52,10 @@ namespace Tagsformatter
         {
 
             InitializeComponent();
-
             ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
-            //SelenuiumScrape2Async();
+            
 
-            YoutubePopularVideos();
+            
         }
 
         private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
@@ -140,6 +140,23 @@ namespace Tagsformatter
             ConvertButton.Background = Brushes.Red;
         }
 
+        private void TrendsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+            DependencyObject originalSource = (DependencyObject)e.OriginalSource;
+            while ((originalSource != null) && !(originalSource is ListViewItem))
+            {
+                originalSource = VisualTreeHelper.GetParent(originalSource);
+            }
+            //if it didn’t find a ListViewItem anywhere in the hierarch, it’s because the user
+            //didn’t click on one. Therefore, if the variable isn’t null, run the code
+            if (originalSource != null)
+            {
+               
+            }
+        }
+    
+
         private void InstagramTags_Checked(object sender, RoutedEventArgs e)
         {
             HeadingLabel.Content = "Instagram";
@@ -189,6 +206,8 @@ namespace Tagsformatter
 
         public void SelenuiumScrape()
         {
+            YoutubeSearchForVideos();
+
             //uses chromedriver class from Selenuim Package to create webdriver.
             using (IWebDriver SelenuimDriver = new ChromeDriver())
             {
@@ -217,60 +236,43 @@ namespace Tagsformatter
                     IWebElement WebsiteResult = SelenuimDriver.FindElement(By.ClassName("instagram-hashtag-results"));
                     MainTextBox.Text += WebsiteResult.Text;
 
-                    string[] TrendingResults =
-                        {
-                            WebsiteResult.Text.Split('#')[0].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
-                            WebsiteResult.Text.Split('#')[2].Trim(), WebsiteResult.Text.Split('#')[3].Trim(),
-                            WebsiteResult.Text.Split('#')[4].Trim()
-                        };
-
-                    List<TrendsInfo> TrendResults = new List<TrendsInfo>();
-                    //TrendResults.Add(new TrendsInfo() { _Relatedqueries = WebsiteResult.Text, _Relatedtopics = "Test2" });                    
-                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[0], _Relatedqueries = "Test2" });
-                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[1], _Relatedqueries = "Test2" });
-                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[2], _Relatedqueries = "Test2" });
-                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[3], _Relatedqueries = "Test2" });
-                    TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[4], _Relatedqueries = "Test2" });
-
-                    TrendsList.ItemsSource = TrendResults;
-
                 }
             }
         }
 
-        public async Task YoutubePopularVideos()
+        public async Task YoutubeSearchForVideos()
         {
+
             var YTService = new YouTubeService(new BaseClientService.Initializer()
             {
                 ApiKey = ""
             });
 
             var Videorequest = YTService.Search.List("snippet");
-            Videorequest.Q = "DeadRising";
-            Videorequest.MaxResults = 5;
+            Videorequest.Q = MainTextBox.Text;
+            //Videorequest.Q = "DeadRising";
+            Videorequest.MaxResults = 10;
 
-            //Videorequest.Chart = VideosResource.ListRequest.ChartEnum.MostPopular;
-            //Videorequest.RegionCode = "gb";
+            var Searchresults = await Videorequest.ExecuteAsync();
+                       
+            List<TrendsInfo> VideoList = new List<TrendsInfo>();
 
-            var Results = await Videorequest.ExecuteAsync();
-
-            List<string> videos = new List<string>();
-
-            if (Results.Items.Count <= 0)
+            if (Searchresults.Items.Count <= 0)
             {
                 Console.WriteLine("No videos found");
                 this.Close();
             }
 
-            foreach (var PopluarVideo in Results.Items)
+            foreach (var PopluarVideo in Searchresults.Items)
             {
-                //Console.WriteLine($"{PopluarVideo.Snippet.Title} (https://www.youtube.com/watch?v={PopluarVideo.Id}");
-               //TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[0], _Relatedqueries = "Test2" });
-                videos.Add(String.Format("{0} ({1})", PopluarVideo.Snippet.Title, PopluarVideo.Id.VideoId));
-                
+
+                VideoList.Add(new TrendsInfo() { _Relatedtopics = String.Format(PopluarVideo.Snippet.Title) });
+
             }
-            MainTextBox.Text = string.Join("\n", videos);
-            //Console.WriteLine(String.Format("Videos:\n{0}\n", string.Join("\n", videos)));
+
+            string[] TrendslistArr;
+            TrendsList.ItemsSource = VideoList;
+     
         }
     }
 }
@@ -335,3 +337,22 @@ namespace Tagsformatter
 //            Console.WriteLine($"Error: {ex.Message}");
 //        }
 //    }
+
+
+
+//string[] TrendingResults =
+//    {
+//        WebsiteResult.Text.Split('#')[0].Trim(), WebsiteResult.Text.Split('#')[1].Trim(),
+//        WebsiteResult.Text.Split('#')[2].Trim(), WebsiteResult.Text.Split('#')[3].Trim(),
+//        WebsiteResult.Text.Split('#')[4].Trim()
+//    };
+
+//List<TrendsInfo> TrendResults = new List<TrendsInfo>();
+////TrendResults.Add(new TrendsInfo() { _Relatedqueries = WebsiteResult.Text, _Relatedtopics = "Test2" });                    
+//TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[0], _Relatedqueries = "Test2" });
+//TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[1], _Relatedqueries = "Test2" });
+//TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[2], _Relatedqueries = "Test2" });
+//TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[3], _Relatedqueries = "Test2" });
+//TrendResults.Add(new TrendsInfo() { _Relatedtopics = TrendingResults[4], _Relatedqueries = "Test2" });
+
+//TrendsList.ItemsSource = TrendResults;
