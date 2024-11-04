@@ -25,9 +25,7 @@ using Google.Apis.Upload;
 using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
-
-
-
+//Using JSON Serialization
 using Newtonsoft.Json.Linq;
 using System.Diagnostics.Contracts;
 using System.Windows.Controls.Primitives;
@@ -40,23 +38,36 @@ namespace Tagsformatter
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public static class TrendsInfo
-    {
-       public static List<string> VideoList = new List<string>();
-
-        public static string _Relatedtopics { get; set; }
-        public static string _Relatedqueries { get; set; }
-    }
     public partial class MainWindow : Window
     {
-        string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
+        //string input, trim, inputText1, inputText2, inputText3, inputText4, inputText5;
 
         public MainWindow()
         {
 
             InitializeComponent();
-            ContentType.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
+            TF_ContentStackPanel.IsEnabled = false; //handles radio button functionality before sumbiting hashtags.
 
+        }
+
+        private static class InputData
+        {
+            public static string input { get; set; }
+            public static string trim { get; set; }
+            public static string inputText1 { get; set; }
+            public static string inputText2 { get; set; }
+            public static string inputText3 { get; set; }
+            public static string inputText4 { get; set; }
+            public static string inputText5 { get; set; }
+
+        }
+
+
+        private static class YTSearchInfo
+        {
+            public static List<string> VideoList = new List<string>();
+
+            public static string _Relatedtopics { get; set; }
         }
 
         private void ThemeCheckbox_Checked(object sender, RoutedEventArgs e)
@@ -66,56 +77,56 @@ namespace Tagsformatter
             string hexColor2 = "#3C3F47";
             var brushConverter = new BrushConverter();
 
-            ContentStackLeft.Background = (Brush)brushConverter.ConvertFromString(hexColor);
-            MainLayout.Background = (Brush)brushConverter.ConvertFromString(hexColor);
-            HeadingLabel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
-            MainTextBox.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            TF_StackPanel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            MainWindowGrid.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            TF_HeadingLabel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            TF_TextBox.Background = (Brush)brushConverter.ConvertFromString(hexColor);
 
-            HeadingLabel.Foreground = Brushes.White;
-            TitleLabel.Foreground = Brushes.White;
-            MainTextBox.Foreground = Brushes.White;
-            MainTextBox.CaretBrush = Brushes.White;
-            ThemeCheckbox.Foreground = Brushes.White;
-            YoutubeTags.Foreground = Brushes.White;
-            InstagramTags.Foreground = Brushes.White;
-            TIKTOKTags.Foreground = Brushes.White;
-            FacebookTags.Foreground = Brushes.White;
-            TwitterTags.Foreground = Brushes.White;
+            TF_HeadingLabel.Foreground = Brushes.White;
+            TF_TitleLabel.Foreground = Brushes.White;
+            TF_TextBox.Foreground = Brushes.White;
+            TF_TextBox.CaretBrush = Brushes.White;
+            DarkModeCheckbox.Foreground = Brushes.White;
+            TF_YoutubeTags.Foreground = Brushes.White;
+            TF_InstagramTags.Foreground = Brushes.White;
+            TF_TIKTOKTags.Foreground = Brushes.White;
+            TF_FacebookTags.Foreground = Brushes.White;
+            TF_TwitterTags.Foreground = Brushes.White;
 
-            ContentType.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
-            ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
-            ConvertButton.Foreground = Brushes.White;
+           TF_ContentStackPanel.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+           TF_ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+           TF_ConvertButton.Foreground = Brushes.White;
         }
 
         private void ThemeCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ContentStackLeft.Background = Brushes.White;
-            MainLayout.Background = Brushes.White;
-            HeadingLabel.Background = Brushes.White;
-            MainTextBox.Background = Brushes.White;
+            TF_StackPanel.Background = Brushes.White;
+            MainWindowGrid.Background = Brushes.White;
+            TF_HeadingLabel.Background = Brushes.White;
+            TF_TextBox.Background = Brushes.White;
 
-            HeadingLabel.Foreground = Brushes.Black;
-            TitleLabel.Foreground = Brushes.Black;
-            MainTextBox.Foreground = Brushes.Black;
+            TF_HeadingLabel.Foreground = Brushes.Black;
+            TF_TitleLabel.Foreground = Brushes.Black;
+            TF_TextBox.Foreground = Brushes.Black;
 
-            MainTextBox.CaretBrush = Brushes.Black;
-            ThemeCheckbox.Foreground = Brushes.Black;
+            TF_TextBox.CaretBrush = Brushes.Black;
+            DarkModeCheckbox.Foreground = Brushes.Black;
 
-            ContentType.Background = Brushes.Yellow;
-            ConvertButton.Background = Brushes.Yellow;
-            ContentType.Background = Brushes.Yellow;
-            ConvertButton.Foreground = Brushes.Black;
+            TF_ContentStackPanel.Background = Brushes.Yellow;
+            TF_ConvertButton.Background = Brushes.Yellow;
+            TF_ContentStackPanel.Background = Brushes.Yellow;
+            TF_ConvertButton.Foreground = Brushes.Black;
 
-            YoutubeTags.Foreground = Brushes.Black;
-            InstagramTags.Foreground = Brushes.Black;
-            TIKTOKTags.Foreground = Brushes.Black;
-            FacebookTags.Foreground = Brushes.Black;
-            TwitterTags.Foreground = Brushes.Black;
+            TF_YoutubeTags.Foreground = Brushes.Black;
+            TF_InstagramTags.Foreground = Brushes.Black;
+            TF_TIKTOKTags.Foreground = Brushes.Black;
+            TF_FacebookTags.Foreground = Brushes.Black;
+            TF_TwitterTags.Foreground = Brushes.Black;
         }
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainTextBox.Text == "")
+            if (TF_TextBox.Text == "")
             {
                 MessageBox.Show("Please enter search term to convert");
                 this.Close();
@@ -124,19 +135,19 @@ namespace Tagsformatter
             else
             {
                 SelenuiumScrape();
-                ContentType.IsEnabled = true;
-                input = MainTextBox.Text;
+                TF_ContentStackPanel.IsEnabled = true;
+                InputData.input = TF_TextBox.Text;
             }
         }
 
         private void YoutubeTags_Checked(object sender, RoutedEventArgs e)
         {
-            HeadingLabel.Content = "Youtube";
-            trim = input.Replace("#", "");
-            trim = trim.Replace(" ", ",");
-            MainTextBox.Text = trim;
-            ContentType.Background = Brushes.Red;
-            ConvertButton.Background = Brushes.Red;
+            TF_HeadingLabel.Content = "Youtube";
+            InputData.trim = InputData.input.Replace("#", "");
+            InputData.trim = InputData.trim.Replace(" ", ",");
+            TF_TextBox.Text = InputData.trim;
+            TF_ContentStackPanel.Background = Brushes.Red;
+            TF_ConvertButton.Background = Brushes.Red;
         }
 
         private void TrendsList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -155,7 +166,7 @@ namespace Tagsformatter
                     var clickedItem = listViewItem.Content;
 
                     // Retrieve the index of the clicked item
-                    int index = TrendsList.ItemContainerGenerator.IndexFromContainer(listViewItem);
+                    int index = YS_ListView.ItemContainerGenerator.IndexFromContainer(listViewItem);
 
                     //Console.WriteLine(TrendsInfo.VideoList[3]);
                     // Display the item and its index
@@ -168,54 +179,54 @@ namespace Tagsformatter
 
         private void InstagramTags_Checked(object sender, RoutedEventArgs e)
         {
-            HeadingLabel.Content = "Instagram";
-            ContentType.Background = Brushes.MediumPurple;
-            ConvertButton.Background = Brushes.MediumPurple;
-            MainTextBox.Text = input;
+            TF_HeadingLabel.Content = "Instagram";
+            TF_ContentStackPanel.Background = Brushes.MediumPurple;
+            TF_ConvertButton.Background = Brushes.MediumPurple;
+            TF_TextBox.Text = InputData.input;
         }
 
         private void TIKTOKTags_Checked(object sender, RoutedEventArgs e)
         {
-            inputText1 = input.Split(' ')[1].Trim();
-            inputText2 = input.Split(' ')[2].Trim();
-            inputText3 = input.Split(' ')[3].Trim();
+            InputData.inputText1 = InputData.input.Split(' ')[1].Trim();
+            InputData.inputText2 = InputData.input.Split(' ')[2].Trim();
+            InputData.inputText3 = InputData.input.Split(' ')[3].Trim();
 
-            MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + "#fyp";
-            ContentType.Background = Brushes.HotPink;
-            ConvertButton.Background = Brushes.HotPink;
+            TF_TextBox.Text = InputData.inputText1 + " " + InputData.inputText2 + " " + InputData.inputText3 + " " + "#fyp";
+            TF_ContentStackPanel.Background = Brushes.HotPink;
+            TF_ConvertButton.Background = Brushes.HotPink;
         }
 
         private void FacebookTags_Checked(object sender, RoutedEventArgs e)
         {
-            HeadingLabel.Content = "Facebook";
+            TF_HeadingLabel.Content = "Facebook";
 
-            inputText1 = input.Split(' ')[1].Trim();
-            inputText2 = input.Split(' ')[2].Trim();
-            inputText3 = input.Split(' ')[3].Trim();
-            inputText4 = input.Split(' ')[4].Trim();
-            inputText5 = input.Split(' ')[5].Trim();
+            InputData.inputText1 = InputData.input.Split(' ')[1].Trim();
+            InputData.inputText2 = InputData.input.Split(' ')[2].Trim();
+            InputData.inputText3 = InputData.input.Split(' ')[3].Trim();
+            InputData.inputText4 = InputData.input.Split(' ')[4].Trim();
+            InputData.inputText5 = InputData.input.Split(' ')[5].Trim();
 
-            MainTextBox.Text = inputText1 + " " + inputText2 + " " + inputText3 + " " + inputText4 + " " + inputText5;
-            ContentType.Background = Brushes.CornflowerBlue;
-            ConvertButton.Background = Brushes.CornflowerBlue;
+            TF_TextBox.Text = InputData.inputText1 + " " + InputData.inputText2 + " " + InputData.inputText3 + " " + InputData.inputText4 + " " + InputData.inputText5;
+            TF_ContentStackPanel.Background = Brushes.CornflowerBlue;
+            TF_ConvertButton.Background = Brushes.CornflowerBlue;
         }
 
         private void TwitterTags_Checked(object sender, RoutedEventArgs e)
         {
-            HeadingLabel.Content = "Twitter";
+            TF_HeadingLabel.Content = "Twitter";
 
-            inputText1 = input.Split(' ')[1].Trim();
-            inputText2 = input.Split(' ')[2].Trim();
+            InputData.inputText1 = InputData.input.Split(' ')[1].Trim();
+            InputData.inputText2 = InputData.input.Split(' ')[2].Trim();
 
-            MainTextBox.Text = inputText1 + " " + inputText2;
+            TF_TextBox.Text = InputData.inputText1 + " " + InputData.inputText2;
 
-            ContentType.Background = Brushes.DeepSkyBlue;
-            ConvertButton.Background = Brushes.DeepSkyBlue;
+            TF_ContentStackPanel.Background = Brushes.DeepSkyBlue;
+            TF_ConvertButton.Background = Brushes.DeepSkyBlue;
         }
 
-        public void SelenuiumScrape()
+        private void SelenuiumScrape()
         {
-            YoutubeSearchForVideos();
+            Task task = YoutubeSearchForVideos();
 
             //uses chromedriver class from Selenuim Package to create webdriver.
             using (IWebDriver SelenuimDriver = new ChromeDriver())
@@ -228,7 +239,7 @@ namespace Tagsformatter
                 //Creating webelement to handing Searchbar and button functionality, via find ID.
                 IWebElement WebsiteSearchBar = SelenuimDriver.FindElement(By.Id("html-input-span-1"));
 
-                WebsiteSearchBar.SendKeys(MainTextBox.Text);
+                WebsiteSearchBar.SendKeys(TF_TextBox.Text);
 
                 //action for the enter key.
                 new Actions(SelenuimDriver)
@@ -239,27 +250,30 @@ namespace Tagsformatter
                 //Using Selenuim driver to create delay/timeout.
                 var Delay = SelenuimDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
+
+
                 if (Delay != null)
                 {
 
                     IWebElement WebsiteResult = SelenuimDriver.FindElement(By.ClassName("instagram-hashtag-results"));
-                    MainTextBox.Text += WebsiteResult.Text;
+                    TF_TextBox.Text += WebsiteResult.Text;
 
                 }
+
+                
             }
         }
 
-        public async Task YoutubeSearchForVideos()
+        private async Task YoutubeSearchForVideos()
         {
 
             var YTService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = ""
+                ApiKey = "AIzaSyDJYPsoxlVTxws3UeQxB364NMrmrqqm2hc"
             });
 
             var Videorequest = YTService.Search.List("snippet");
-            Videorequest.Q = MainTextBox.Text;
-            //Videorequest.Q = "DeadRising";
+            Videorequest.Q = TF_TextBox.Text;
             Videorequest.MaxResults = 10;
 
             var Searchresults = await Videorequest.ExecuteAsync();
@@ -272,14 +286,14 @@ namespace Tagsformatter
                 this.Close();
             }
 
-            foreach (var PopluarVideo in Searchresults.Items)
+            foreach (var YTVideos in Searchresults.Items)
             {
 
-               TrendsInfo.VideoList.Add(TrendsInfo._Relatedtopics = String.Format(PopluarVideo.Snippet.Title));
+                YTSearchInfo.VideoList.Add(YTSearchInfo._Relatedtopics = String.Format(YTVideos.Snippet.Title));
 
             }
 
-            TrendsList.ItemsSource = TrendsInfo.VideoList;
+            YS_ListView.ItemsSource = YTSearchInfo.VideoList;
      
         }
     }

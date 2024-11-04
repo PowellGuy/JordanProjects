@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tagsformatter.exe" size="21984">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tagsformatter.exe" size="23008">
       <assemblyIdentity name="Tagsformatter" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qcp9ss97K6m1F0KArdJKwcer8sH+vnjsNj4iY2e4014=</dsig:DigestValue>
+        <dsig:DigestValue>cLEwMcLJ+sRnQLvj+d5zysMBdO3LRH9sy7VRiKce9ss=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

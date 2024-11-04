@@ -5,49 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tagsformatter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000">
+        Title="TagsFormatter" Height="450" Width="1000">
 
-    <Grid x:Name="MainLayout" Background="White" Width="1000" Height="450" HorizontalAlignment="Left">
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="63*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="19*"/>            
-        </Grid.RowDefinitions>-->
+    <Grid x:Name="MainWindowGrid" Background="White" Width="1000" Height="450" HorizontalAlignment="Left">
 
-        <CheckBox x:Name="ThemeCheckbox" Content="Dark Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ThemeCheckbox_Checked" Unchecked="ThemeCheckbox_Unchecked"/>
+        <CheckBox x:Name="DarkModeCheckbox" Content="Dark Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ThemeCheckbox_Checked" Unchecked="ThemeCheckbox_Unchecked"/>
 
-        <StackPanel x:Name="ContentStackLeft" Background="White" HorizontalAlignment="Left" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
-            <Label x:Name="TitleLabel" Content="Tags Formatter" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="ObelixPro" FontSize="25"/>
-            <Label x:Name="HeadingLabel" Content="Paste the text that you want formatting" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
+        <StackPanel x:Name="TF_StackPanel" Background="White" HorizontalAlignment="Left" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
+            <Label x:Name="TF_TitleLabel" Content="Tags Formatter" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="ObelixPro" FontSize="25"/>
+            <Label x:Name="TF_HeadingLabel" Content="Paste the text that you want formatting" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
 
             <Border BorderThickness="1" BorderBrush="Black" Height="191" Width="304">
-                <TextBox x:Name="MainTextBox" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Height="191" Width="304" Background="White" CaretBrush="White" />
+                <TextBox x:Name="TF_TextBox" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Height="191" Width="304" Background="White" CaretBrush="White" />
             </Border>
 
 
-            <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="yellow" FontFamily="Tahoma"/>
-            <StackPanel x:Name="ContentType" Orientation="Horizontal" Background="Yellow">
-                <RadioButton x:Name="YoutubeTags" Content="Youtube" Margin="20,10,0,10" HorizontalAlignment="Center" Width="75" Checked="YoutubeTags_Checked" FontFamily="Kris" FontSize="12" />
-                <RadioButton x:Name="InstagramTags" Content="Instagram" Margin="10,10,0,10"  HorizontalAlignment="Center" Width="75" Checked="InstagramTags_Checked" FontFamily="Lucida D"/>
-                <RadioButton x:Name="TIKTOKTags" Content="Tiktok" Margin="10,10,0,10" HorizontalAlignment="Center" Width="75" Checked="TIKTOKTags_Checked" FontFamily="Tahoma"/>
-                <RadioButton x:Name="FacebookTags" Content="Facebook" Margin="10,10,10,10" HorizontalAlignment="Center" Width="75" Checked="FacebookTags_Checked" FontFamily="Tahoma"/>
-                <RadioButton x:Name="TwitterTags" Content="Twitter" Margin="10,10,0,10" HorizontalAlignment="Center" Width="75" Checked="TwitterTags_Checked" FontFamily="Tahoma"/>
+            <Button x:Name="TF_ConvertButton" Content="Convert" HorizontalAlignment="Center" Margin="188,10" VerticalAlignment="Top" Width="74" Click="ConvertButton_Click" Background="yellow" FontFamily="Tahoma"/>
+            <StackPanel x:Name="TF_ContentStackPanel" Orientation="Horizontal" Background="Yellow">
+                <RadioButton x:Name="TF_YoutubeTags" Content="Youtube" Margin="20,10,0,10" HorizontalAlignment="Center" Width="75" Checked="YoutubeTags_Checked" FontFamily="Kris" FontSize="12" />
+                <RadioButton x:Name="TF_InstagramTags" Content="Instagram" Margin="10,10,0,10"  HorizontalAlignment="Center" Width="75" Checked="InstagramTags_Checked" FontFamily="Lucida D"/>
+                <RadioButton x:Name="TF_TIKTOKTags" Content="Tiktok" Margin="10,10,0,10" HorizontalAlignment="Center" Width="75" Checked="TIKTOKTags_Checked" FontFamily="Tahoma"/>
+                <RadioButton x:Name="TF_FacebookTags" Content="Facebook" Margin="10,10,10,10" HorizontalAlignment="Center" Width="75" Checked="FacebookTags_Checked" FontFamily="Tahoma"/>
+                <RadioButton x:Name="TF_TwitterTags" Content="Twitter" Margin="10,10,0,10" HorizontalAlignment="Center" Width="75" Checked="TwitterTags_Checked" FontFamily="Tahoma"/>
             </StackPanel>
 
         </StackPanel>
 
-        <StackPanel x:Name="ContentStackCenter" Background="blue" HorizontalAlignment="Center" Height="450" VerticalAlignment="Center" Width="90"/>
+        <StackPanel x:Name="App_StackPanel_Center" Background="white" HorizontalAlignment="Center" Height="450" VerticalAlignment="Center" Width="90"/>
 
-        <StackPanel x:Name="ContentStackRight" Background="White" HorizontalAlignment="Right" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
-            <Label x:Name="TitleLabelRight" Content="List" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="ObelixPro" FontSize="25"/>
-            <Label x:Name="HeadingLabelRight" Content="Google Trends - Trending Topics" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
+        <StackPanel x:Name="YS_StackPanel" Background="White" HorizontalAlignment="Right" Height="400" VerticalAlignment="Center" Width="450" Margin="0,12,0,13" Grid.RowSpan="3">
+            <Label x:Name="YS_TitleLabel" Content="YouTube Search" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Center" FontFamily="ObelixPro" FontSize="25"/>
+            <Label x:Name="YS_HeadingLabel" Content="Youtube Search Suggestions" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16"/>
 
-            <ListView x:Name="TrendsList" Margin="0,0,0,0" VerticalAlignment="Center" Height="191" Width="304" Background="White" BorderBrush="Black" BorderThickness="1" MouseDoubleClick="TrendsList_MouseDoubleClick">
+            <ListView x:Name="YS_ListView" Margin="0,0,0,0" VerticalAlignment="Center" Height="191" Width="304" Background="White" BorderBrush="Black" BorderThickness="1" MouseDoubleClick="TrendsList_MouseDoubleClick">
             
                 <ListView.View>
                     <GridView>
                     
-                        <GridViewColumn Header="Related topics" Width="304"/>
+                        <GridViewColumn Header="List of suggested searches." Width="304"/>
                            
                     </GridView>
                 </ListView.View>
