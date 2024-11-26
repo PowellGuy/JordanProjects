@@ -92,10 +92,16 @@ namespace Tagsformatter
             TF_TIKTOKTags.Foreground = Brushes.White;
             TF_FacebookTags.Foreground = Brushes.White;
             TF_TwitterTags.Foreground = Brushes.White;
+            YS_TitleLabel.Foreground = Brushes.White;
+            YS_HeadingLabel.Foreground = Brushes.White;
 
-           TF_ContentStackPanel.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
-           TF_ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
-           TF_ConvertButton.Foreground = Brushes.White;
+
+            TF_ContentStackPanel.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+            TF_ConvertButton.Background = (Brush)brushConverter.ConvertFromString(hexColor2);
+            TF_ConvertButton.Foreground = Brushes.White;
+            YS_StackPanel.Background = (Brush)brushConverter.ConvertFromString(hexColor);
+            App_StackPanel_Center.Background = (Brush)(brushConverter.ConvertFromString(hexColor));
+            YS_ListView.Background = (Brush)(brushConverter.ConvertFromString(hexColor));
         }
 
         private void ThemeCheckbox_Unchecked(object sender, RoutedEventArgs e)
@@ -104,6 +110,10 @@ namespace Tagsformatter
             MainWindowGrid.Background = Brushes.White;
             TF_HeadingLabel.Background = Brushes.White;
             TF_TextBox.Background = Brushes.White;
+            YS_StackPanel.Background = Brushes.White;
+            App_StackPanel_Center.Background = Brushes.White;
+            YS_ListView.Background = Brushes.White;
+
 
             TF_HeadingLabel.Foreground = Brushes.Black;
             TF_TitleLabel.Foreground = Brushes.Black;
@@ -122,6 +132,11 @@ namespace Tagsformatter
             TF_TIKTOKTags.Foreground = Brushes.Black;
             TF_FacebookTags.Foreground = Brushes.Black;
             TF_TwitterTags.Foreground = Brushes.Black;
+            YS_TitleLabel.Foreground = Brushes.Black;
+            YS_HeadingLabel.Foreground = Brushes.Black;
+
+
+
         }
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
@@ -269,7 +284,7 @@ namespace Tagsformatter
 
             var YTService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyDJYPsoxlVTxws3UeQxB364NMrmrqqm2hc"
+                ApiKey = ""
             });
 
             var Videorequest = YTService.Search.List("snippet");
